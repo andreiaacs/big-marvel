@@ -1,0 +1,48 @@
+<ng-container *ngIf="!loading; else loader">
+    <div class="container">
+        <div class="busca mt-4">
+            <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Personagem</span>
+                </div>
+                <input type="text" class="form-control" [ngModel]="searchTerm" (change)="search()">
+            </div>
+        </div>
+        <div class="d-flex mt-4">
+            <div class="row">
+                <mat-card *ngFor="let character of characters | paginate: { id: 'heroi',
+                                                itemsPerPage: pageSize,
+                                                currentPage: p,
+                                                totalItems: total}" class="col-lg-4 col-md-6 card">
+
+
+                    <img mat-card-image class="card-image" src={{character.thumbnail.path}}.{{character.thumbnail.extension}} alt="{{character.name}}">
+
+                    <!-- Nome de todos os herois-->
+                    <mat-card-title class="character-title">
+                        {{character.name}}
+                    </mat-card-title>
+
+                    <!--Descrição dos herois-->
+                    <mat-card-content class="character-description">
+                        {{character.description}}
+                    </mat-card-content>
+
+                    <!--Detalhes dos personagens-->
+                    <mat-card-footer class="character-detail">
+                        <a href="{{character.urls[0].url}}" target="_blank" fxFlex mat-flat-button class="btn btn-outline-secondary">Detalhes </a>
+                    </mat-card-footer>
+
+                </mat-card>
+            </div>
+        </div>
+        <div class="mt-4">
+            <pagination-controls id="heroi" (pageChange)="p = $event"></pagination-controls>
+        </div>
+    </div>
+</ng-container>
+<ng-template #loader>
+    <div class="container d-flex justify-content-center mt-4">
+        <img class="fa-blink loader-img" src="../../assets/images/loader.png" alt="Loading...">
+    </div>
+</ng-template>

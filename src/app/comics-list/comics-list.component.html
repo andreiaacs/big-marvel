@@ -1,0 +1,40 @@
+<ng-container *ngIf="!loading; else loader">
+    <div class="container">
+        <div class="d-flex mt-4">
+            <div class="row">
+                <mat-card *ngFor="let comic of comics | paginate: { id: 'historia',
+                                                itemsPerPage: pageSize,
+                                                currentPage: p,
+                                                totalItems: total}" class="col-lg-4 col-md-6 card">
+
+                    <img mat-card-image class="card-image" src={{comic.thumbnail.path}}.{{comic.thumbnail.extension}} alt="{{ comic.title }}">
+
+                    <!-- Nome de todos os herois-->
+                    <mat-card-title class="comic-title">
+                        {{ comic.title }}
+                    </mat-card-title>
+
+                    <!--Descrição dos herois-->
+                    <mat-card-content class="comic-description">
+                        {{ comic.description }}
+                    </mat-card-content>
+
+                    <!--Detalhes dos personagens-->
+                    <mat-card-footer class="comic-detail">
+                        <a href="{{ comic.urls[0].url }}" target="_blank" fxFlex mat-flat-button class="btn btn-outline-secondary">Detalhes </a>
+                    </mat-card-footer>
+
+                </mat-card>
+            </div>
+
+            <div class="mt-4">
+                <pagination-controls id="historia" (pageChange)="p = $event"></pagination-controls>
+            </div>
+        </div>
+    </div>
+</ng-container>
+<ng-template #loader>
+    <div class="container d-flex justify-content-center mt-4">
+        <img class="fa-blink loader-img" src="../../assets/images/loader.png" alt="Loading...">
+    </div>
+</ng-template>
