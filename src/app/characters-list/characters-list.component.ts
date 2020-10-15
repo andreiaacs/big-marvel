@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, PipeTransform } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { Character } from '../models/character';
 import { CharactersService } from '../services/characters.service';
@@ -8,14 +8,14 @@ import { CharactersService } from '../services/characters.service';
   templateUrl: './characters-list.component.html',
   styleUrls: ['./characters-list.component.css']
 })
-export class CharactersListComponent implements OnInit {
+export class CharactersListComponent implements OnInit  {
 
   public characters: any;
   public pageSize: number = 20;
   public p: number = 1;
   public total: number = 100;
   public loading: boolean = true;
-  public searchTerm: string = '';
+  public characterSearch: string = '';
 
   constructor(
     private readonly charactersService: CharactersService,
@@ -33,10 +33,9 @@ export class CharactersListComponent implements OnInit {
         });
   }
 
-  search(): void {
-    let term = this.searchTerm;
-    const a = this.characters.filter((tag) => tag.name.indexOf(term) >= 0);
+  filtrar(filtro): void {
     debugger;
+   // this.characters.filter(item => item.name.indexOf(filtro) !== -1);
   }
 
 }

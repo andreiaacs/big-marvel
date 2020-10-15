@@ -11,9 +11,9 @@ import { ComicsService } from '../services/comics.service';
 export class ComicsListComponent implements OnInit {
 
   public comics: any;
-  public pageSize: number = 20;
+  public pageSize: number = 9;
   public p: number = 1;
-  public total: number = 100;
+  public total: number = 20;
   public loading: boolean = true;
 
   constructor(
@@ -33,7 +33,6 @@ export class ComicsListComponent implements OnInit {
   }
 
   getComic(c: Comic): void {
-    debugger;
     // this.comicsService
     //   .getComicById()
     //   .pipe(first())

@@ -1,45 +1,53 @@
 <ng-container *ngIf="!loading; else loader">
-    <div class="container">
-        <div class="busca mt-4">
-            <div class="input-group mb-3">
+    <section id="team" class="pb-5">
+        <div class="container">
+            <h1 class="section-title h1">PERSONAGENS</h1>
+            <div class="input-group">
                 <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-default">Personagem</span>
+                    <div class="input-group-text"><img src="../../assets/images/vingadores.png"></div>
                 </div>
-                <input type="text" class="form-control" [ngModel]="searchTerm" (change)="search()">
+                <input type="text" [(ngModel)]="filtro" (ngModelChange)='filtrar(filtro)' class="form-control" id="inlineFormInputGroupUsername" placeholder="Personagem">
             </div>
-        </div>
-        <div class="d-flex mt-4">
+            <br />
+            <div>
+                <pagination-controls responsive="true" class="pagination justify-content-center" id="heroi" (pageChange)="p = $event"></pagination-controls>
+            </div>
             <div class="row">
-                <mat-card *ngFor="let character of characters | paginate: { id: 'heroi',
-                                                itemsPerPage: pageSize,
-                                                currentPage: p,
-                                                totalItems: total}" class="col-lg-4 col-md-6 card">
+                <div *ngFor="let character of characters | paginate: {  id: 'heroi',
+                                                                        itemsPerPage: pageSize,
+                                                                        currentPage: p,
+                                                                        totalItems: total}" class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="image-flip">
+                        <div class="mainflip flip-0">
+                            <div class="frontside">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <p><img class=" img-fluid" src={{character.thumbnail.path}}.{{character.thumbnail.extension}} alt="{{character.name}}"></p>
+                                        <h4 class="card-title">{{character.name}}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="backside">
+                                <div class="card">
+                                    <div class="card-body text-center mt-4">
+                                        <h4 class="card-title">{{character.name}}</h4>
+                                        <p class="card-text">{{character.description}}</p>
 
+                                        <span class="tw-heart-box">
+                                                <input type="checkbox" name="name" value="">
+                                                <span class="tw-heart"></span>
+                                        </span>
 
-                    <img mat-card-image class="card-image" src={{character.thumbnail.path}}.{{character.thumbnail.extension}} alt="{{character.name}}">
-
-                    <!-- Nome de todos os herois-->
-                    <mat-card-title class="character-title">
-                        {{character.name}}
-                    </mat-card-title>
-
-                    <!--Descrição dos herois-->
-                    <mat-card-content class="character-description">
-                        {{character.description}}
-                    </mat-card-content>
-
-                    <!--Detalhes dos personagens-->
-                    <mat-card-footer class="character-detail">
-                        <a href="{{character.urls[0].url}}" target="_blank" fxFlex mat-flat-button class="btn btn-outline-secondary">Detalhes </a>
-                    </mat-card-footer>
-
-                </mat-card>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-        <div class="mt-4">
-            <pagination-controls id="heroi" (pageChange)="p = $event"></pagination-controls>
-        </div>
-    </div>
+    </section>
+
 </ng-container>
 <ng-template #loader>
     <div class="container d-flex justify-content-center mt-4">

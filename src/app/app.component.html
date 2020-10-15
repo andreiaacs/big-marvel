@@ -1,6 +1,36 @@
-<nav class="navbar navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">
-        <img src="../../assets/images/back.png" width="30" height="30" alt="">
-    </a>
-</nav>
-<router-outlet></router-outlet>
+<div class="wrapper d-flex align-items-stretch">
+    <nav id="sidebar">
+        <div class="p-4 pt-5">
+            <a href="#" class="img logo rounded-circle mb-5" style="background-image: url(../assets/images/marvel.ico);"></a>
+            <ul class="list-unstyled components mb-5">
+                <li>
+                    <a href="/">Início</a>
+                </li>
+                <li>
+                    <a href="/comics">Quadrinhos</a>
+                </li>
+                <li>
+                    <a href="/characters">Personagens</a>
+                </li>
+                <li>
+                    <a href="/about">Sobre</a>
+                </li>
+                <li>
+                    <a href="/contact">Contato</a>
+                </li>
+            </ul>
+
+            <div class="footer">
+                <p>
+                    Copyright &copy; 2020 - All rights reserved
+                </p>
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- Page Content  -->
+    <div id="content" class="p-4 p-md-5">
+        <router-outlet></router-outlet>
+    </div>
+</div>

@@ -10,6 +10,12 @@ import { CharactersListComponent } from './characters-list/characters-list.compo
 import { HttpClientModule } from '@angular/common/http';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+
+import { FilterPipe } from './pipes/filter.pipe';
+import { PipesModule } from 'w-ng5';
+
 
 @NgModule({
   declarations: [
@@ -17,6 +23,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     MainComponent,
     ComicsListComponent,
     CharactersListComponent,
+    AboutComponent,
+    ContactComponent,
+    FilterPipe,
   ],
   imports: [
     BrowserModule,
@@ -24,6 +33,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     HttpClientModule,
     NgxPaginationModule,
     BrowserAnimationsModule,
+    PipesModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

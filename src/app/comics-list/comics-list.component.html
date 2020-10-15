@@ -1,37 +1,43 @@
 <ng-container *ngIf="!loading; else loader">
-    <div class="container">
-        <div class="d-flex mt-4">
-            <div class="row">
-                <mat-card *ngFor="let comic of comics | paginate: { id: 'historia',
-                                                itemsPerPage: pageSize,
-                                                currentPage: p,
-                                                totalItems: total}" class="col-lg-4 col-md-6 card">
-
-                    <img mat-card-image class="card-image" src={{comic.thumbnail.path}}.{{comic.thumbnail.extension}} alt="{{ comic.title }}">
-
-                    <!-- Nome de todos os herois-->
-                    <mat-card-title class="comic-title">
-                        {{ comic.title }}
-                    </mat-card-title>
-
-                    <!--Descrição dos herois-->
-                    <mat-card-content class="comic-description">
-                        {{ comic.description }}
-                    </mat-card-content>
-
-                    <!--Detalhes dos personagens-->
-                    <mat-card-footer class="comic-detail">
-                        <a href="{{ comic.urls[0].url }}" target="_blank" fxFlex mat-flat-button class="btn btn-outline-secondary">Detalhes </a>
-                    </mat-card-footer>
-
-                </mat-card>
+    <section id="team" class="pb-5">
+        <div class="container">
+            <h1 class="section-title h1">QUADRINHOS</h1>
+            <div>
+                <pagination-controls responsive="true" class="pagination justify-content-center" id="historia" (pageChange)="p = $event"></pagination-controls>
             </div>
-
-            <div class="mt-4">
-                <pagination-controls id="historia" (pageChange)="p = $event"></pagination-controls>
+            <div class="row">
+                <div *ngFor="let comic of comics | paginate: { id: 'historia',
+                                                               itemsPerPage: pageSize,
+                                                               currentPage: p,
+                                                               totalItems: total}" class="col-xs-12 col-sm-6 col-md-4">
+                    <div class="image-flip">
+                        <div class="mainflip flip-0">
+                            <div class="frontside">
+                                <div class="card">
+                                    <div class="card-body text-center">
+                                        <p><img class=" img-fluid" src="{{comic.thumbnail.path}}.{{comic.thumbnail.extension}}" alt="{{ comic.title }}"></p>
+                                        <h4 class="card-title">{{ comic.title }}</h4>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="backside">
+                                <div class="card">
+                                    <div class="card-body text-center mt-4">
+                                        <h4 class="card-title">{{ comic.title }}</h4>
+                                        <p class="card-text">{{ comic.description }}</p>
+                                        <a href="{{ comic.urls[0].url }}" class="btn btn-primary btn-sm">
+                                            <p class="btn-detalhes">Detalhes</p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+    </section>
+
 </ng-container>
 <ng-template #loader>
     <div class="container d-flex justify-content-center mt-4">
