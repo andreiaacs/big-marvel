@@ -1,4 +1,4 @@
-import { Component, OnInit, PipeTransform } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { first } from 'rxjs/operators';
 import { Character } from '../models/character';
 import { CharactersService } from '../services/characters.service';
@@ -8,7 +8,7 @@ import { CharactersService } from '../services/characters.service';
   templateUrl: './characters-list.component.html',
   styleUrls: ['./characters-list.component.css']
 })
-export class CharactersListComponent implements OnInit  {
+export class CharactersListComponent implements OnInit, OnDestroy {
 
   public characters: any;
   public pageSize: number = 20;
@@ -23,19 +23,17 @@ export class CharactersListComponent implements OnInit  {
 
   ngOnInit(): void {
     this.charactersService
-      .getCharacters()
-      .pipe(first())
-      .subscribe(
-        (res: Character) => {
-          console.log('Deu bom: ', res);
-          this.characters = res.data.results;
-          this.loading = false;
-        });
+    .getCharacters()
+    .pipe(first())
+    .subscribe(
+      (res: Character) => {
+        console.log('Deu bom: ', res);
+        this.characters = res.data.results;
+        this.loading = false;
+      });
   }
 
-  filtrar(filtro): void {
-    debugger;
-   // this.characters.filter(item => item.name.indexOf(filtro) !== -1);
-  }
+  ngOnDestroy(): void {
+  }  
 
 }
